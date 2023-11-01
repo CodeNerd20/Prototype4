@@ -28,4 +28,9 @@ public class SpawnManager : MonoBehaviour
         return randomPos;
 
     }
+
+    public void SpawnEnemy()
+    {
+        Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+    }
 }

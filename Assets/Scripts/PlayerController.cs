@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerUp;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+    public bool hasEvilPowerUp;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,13 @@ public class PlayerController : MonoBehaviour
             powerupIndicator.gameObject.SetActive(true);
             Destroy(other.gameObject);
             StartCoroutine(PowerUpCountdownRoutine());
+        }else
+        if (other.CompareTag("EvilPowerUP"))
+        {
+            hasEvilPowerUp = true;
+            powerupIndicator.gameObject.SetActive(true);
+            Destroy(other.gameObject);
+            StartCoroutine(SpawnEnemyRoutine());
         }
     }
 
@@ -44,6 +52,14 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(7);
         hasPowerUp = false;
+        powerupIndicator.gameObject.SetActive(false);
+    }
+
+    IEnumerator SpawnEnemyRoutine()
+    {
+        GameObject.Find("SpawnManager").GetComponent<SpawnManager>().SpawnEnemy();
+        yield return new WaitForSeconds(25);
+        hasEvilPowerUp = false;
         powerupIndicator.gameObject.SetActive(false);
     }
 
