@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
-    public float speed = 1.0f;
+    public float speed = 5.0f;
     private GameObject focalPoint;
     public bool hasPowerUp;
     private float powerupStrength = 15.0f;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float forwardInput = Input.GetAxis("Vertical");
 
